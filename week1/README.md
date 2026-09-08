@@ -60,4 +60,4 @@ To start a new paragraph, leave an empty line between two lines of text.
 
 This is a new paragraph.
 
-Pennt's Creative Coding Repo
+Penny's Creative Coding Repo
