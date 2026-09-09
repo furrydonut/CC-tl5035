@@ -3,12 +3,12 @@
 
 const quotes = [
   { text: "a process, based on exploration, iteration, reflection and discovery.", source: "Tim Rodenbröker" },
-  { text: "a new interdisciplinary art form that bridges the gap between technologists and artists.", source: "Ahmad Moussa" },
+  { text: "a new interdisciplinary art form \nthat bridges the gap between technologists and artists.", source: "Ahmad Moussa" },
   { text: "the practice of making art with code.", source: "Andrew Bryant" },
-  { text: "used to describe a wide range of artistic practices that use computer code as a medium.", source: "Raphaël de Courville" },
+  { text: "used to describe a wide range of artistic practices \nthat use computer code as a medium.", source: "Raphaël de Courville" },
   { text: "about experimentation, not functionality.", source: "Maura Kelly" },
-  { text: "the practice of using programming and coding techniques to create visual, auditory or interactive artworks.", source: "Lily from Tabicoding.com" },
-  { text: "a specialty that utilizes code and programming to create more expressive, designed, and custom web designs", source: "Michale Barsky" },
+  { text: "the practice of using programming and coding techniques \nto create visual, auditory or interactive artworks.", source: "Lily from Tabicoding.com" },
+  { text: "a specialty that utilizes code and programming \nto create more expressive, designed, and custom web designs", source: "Michale Barsky" },
   { text: "how you can mix surprises with control.", source: "Rebecca - The Hobby Hopper" }
 ];
 // no need to edit anything below this line! 
