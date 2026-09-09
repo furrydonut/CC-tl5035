@@ -2,14 +2,14 @@
 // this is the only part of the file you need to edit!
 
 const quotes = [
-  { text: "the intersection of programming, design, and art", source: "Scott" },
-  { text: "a chance for code to be wrong", source: "Sara" },
-  { text: "surprise, exploration, and aesthetic exploration", source: "Sally" },
-  { text: "process over results", source: "Sam" },
-  { text: "form over function", source: "Sean" },
-  { text: "iterative and experimental", source: "Scooby" },
-  { text: "a community of practice", source: "Seth" },
-  { text: "an opportunity to stick it to the man", source: "Shifty-eyed Susan" }
+  { text: "a process, based on exploration, iteration, reflection and discovery.", source: "Tim Rodenbröker" },
+  { text: "a new interdisciplinary art form that bridges the gap between technologists and artists.", source: "Ahmad Moussa" },
+  { text: "the practice of making art with code.", source: "Andrew Bryant" },
+  { text: "used to describe a wide range of artistic practices that use computer code as a medium.", source: "Raphaël de Courville" },
+  { text: "about experimentation, not functionality.", source: "Maura Kelly" },
+  { text: "the practice of using programming and coding techniques to create visual, auditory or interactive artworks.", source: "Lily from Tabicoding.com" },
+  { text: "a specialty that utilizes code and programming to create more expressive, designed, and custom web designs", source: "Michale Barsky" },
+  { text: "how you can mix surprises with control.", source: "Rebecca - The Hobby Hopper" }
 ];
 // no need to edit anything below this line! 
 // if you have made an error, you can check your history to see what might have gone wrong
@@ -21,8 +21,8 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   // Seed with millis() so each page load gives a different quote.
   randomSeed(millis());
-  textSize(32);
-  fill(10, 255, 10);
+  textSize(24);
+  fill(250, 250, 250);
   // calls the function to pick a quote
   pickQuote();
 }
@@ -33,7 +33,7 @@ function pickQuote() {
 }
 
 function draw() {
-  background(255, 20, 250); // set the background color
+  background(112, 43, 157); // set the background color
   drawQuote();  // draw the quote on screen
 }
 
