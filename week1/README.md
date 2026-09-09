@@ -66,6 +66,6 @@ My coding professor once said that coding is basically giving a series of instru
 
 However, as I browsed the web for quotes on creative coding, I came across an artist who uses p5.js to generate geometric patterns from different cultures. I was deeply inspired by her works, and I would love to reinterpret this concept through my own cultural background using code.
 
-https://www.tabicoding.com/index.html
-![image description]https://www.tabicoding.com/pic/batikp5.jpg
+[Lily from Tabiocoding.com](https://www.tabicoding.com/index.html)
+![image description](https://www.tabicoding.com/pic/batikp5.jpg)
 
