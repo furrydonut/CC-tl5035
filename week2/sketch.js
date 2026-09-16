@@ -1,46 +1,73 @@
-let xPos;
-let yPos;
-//starts with letters,numbers,underscore.
-//define the varaible
 function setup() {
-    createCanvas(windowWidth, windowHeight);
-    colorMode(HSB);
-    //degreeMode(DEGREESS):roration mode to degrees.
-    //rotate():https://p5js.org/reference/p5/rotate/
-    xPos=width/2;
-    yPos=height/2;
-    //consol.log():debug and get information back from program.
-    //Change color mode, the default is RGB.
-    //HTML color: https://www.computerhope.com/htmcolor.htm
-
-    background(,25,120);
+    createCanvas(2000, 2000);
+    xPos = width/2;
+    yPos = height/2;
+    bgColor = 220;
+    //Random ellipe size
+    ellipseSize = random(600,1200);
+    //Radom scale
+    sRandom = random(1, 3);
+    //Random rotation
+    rRandom = random(0, 360);
+    //Random translation
+    tRandom = random(0, 400);
+    rectWidth = random(200, 800);
+    rectHeight = rectWidth/2;
+    //Random color
+    manycolors = [('#0033ff'), ('#ff0000'), ('#fbff00')];
+    cRandom = random(manycolors) ;
+    //shuffledcolor =shuffle(manycolors, true);
+    background(bgColor);    
 }
-
-
 
 function draw() {
-    translate(200,200);
-    //translate effects what goes down here
-    ellipse(0,0,100);
-    //varaibles
-    fill('#FFF380');
+    translate(xPos,yPos);  
+
+    //Draw the rectangle
+    push();
+    rotate(rRandom);
     rectMode(CENTER);
-    rect(xPos,yPos,100,100);
-    stroke(120,200,103);
-    fill(250,250,250,150);
-    //strokeWight()
-    //Tab applies the changes to the next line of code, so you can see what is affected by the changes.
-    //noStroke()
-    //translate():Translates the coordinate system.
-    //push(): save the current transformation state
-    //pop(): escape the current transformation state and restore the previous one.
- 
+    translate(0,tRandom);
+    noStroke();
+    fill('#ff0000');
+    rect(0,0,rectWidth*sRandom,rectHeight*sRandom);
+    pop();
+
+    //Draw the ellipse
+    push();  
+    blendMode(MULTIPLY);
+    strokeWeight(20);
+    fill('#0033ff');
+    ellipse(tRandom,tRandom,ellipseSize);
+    translate();
+    pop();
+    
+    
+    //Draw the triangle
+    push();
+      scale(sRandom); 
+      rotate(rRandom);   
+      translate(0,tRandom);
+      fill('#fbff00');
+      strokeWeight(2); 
+      triangle(0, 0, 400, 100, 430, 375);
+      blendMode(BURN);     
+    pop();
+
+    
+}
+    function mousePressed() {
+    background(bgColor);
+    sRandom = random(1, 3);
+    rRandom = random(0, 360);
+    tRandom = random(0, 400);
+    rectWidth = random(100, 300);
+    rectHeight = rectWidth/2;
+    //cRandom = random(manycolors)
+    ellipseSize = random(200,500);
+    
 }
 
-function mousePressed() {
-     background(120,25,120);
-     //paint over the background to clear the screen.
-    xPos = random(0,width);
-    yPos = random(0,height);
-    console.log("mousePressed() xPos: " + xPos + " yPos: " + yPos);
-}
+  
+//function windowResized() { 
+//resizeCanvas(2000, 2000); }
