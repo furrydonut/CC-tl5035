@@ -1,60 +1,39 @@
+let rayCount = 12;
+let rayRadius = 1500;
 
-//Condition: True of Falsee
-//If statement
-// &&: and 
-// ||: or
-// ==: is a question/condition
-
-// for loop
-// while loop
-// i:index
-
-//1.Declare the variable
-//let y;
-//**const = constant value, will never change
-
-//Podka Spots 
-
-let cDiam = 50;
-
-let xSpacing = 100;
-let xOffset = 50;
-
-let maxCount = 50;
-
-//let colors = ['blue'];
-let blueShade = 5;
-
-//setup happens before the website is shown, only happens once and that's it
 function setup(){
     createCanvas(1000,1000);
-    noLoop();
-}
+    //noLoop();
+    }
 
-//Create nonovelapping circles 
 function draw() {
-  background(0,170,250);
-//blendMode(MULTIPLY);
-//Change the color of the bubble randomly  
-for (let i = 0; i < blueShade; i += 1) {
-    
-    
-    fill(0,170,i/250);
-    //stroke('blue');
-    //strokeWeight(1);
-    noStroke
-    let d = random (20,100);
-    let x = random(width);
-    let y = random(height);
-    ellipse(x,y, d);
+  background('lightpink');
+//Move the canvas to the center and rotate.
+push()
+translate(500,500);
+rotate(mouseX/500); 
 
+//Draw the rays.
+for (let i = 0; i < rayCount; i+= 1){
+
+  stroke(0);
+  strokeWeight(10);
+  fill('yellow');
+  //TWO_PI = an entire crcle /    
+  let angle = TWO_PI/rayCount;  
+  arc(0, 0, rayRadius, rayRadius, i * angle, i * angle + angle / 2,PIE);
+}
+ pop();
+
+push();
+strokeWeight(15);
+fill(255,0,0);
+ellipse(500,500,300);
+pop();
 
   }
 
 
-
-//cocnsole.log('mouseX =')
-}
 
 
 

@@ -1,7 +1,9 @@
-It's getting harder to comprehend but I'm managed. What I do is following each review to first make sure I understand the idea, then I tried to add a twist to it.  
+Getting trickier.
 
 1. Right click on the .html file to open Live Server on each sketch.
-
+2. When using blendMode(), remember to set to BLEND in the beginning, or there will be crazy glithces.
+3. noLoop() stops the animation/interatction.
+4. Add more to sketch3, have it spread evenly in nine squres, each with different background color and can color. (TBC.)
 
 
 

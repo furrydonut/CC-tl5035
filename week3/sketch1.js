@@ -1,55 +1,39 @@
+let cDiam = 10;
 
-//Condition: True of Falsee
-//If statement
-// &&: and 
-// ||: or
-// ==: is a question/condition
+let xSpacing = 10;
 
-// for loop
-// while loop
-// i:index
+let ySpacing = 10;
 
-//1.Declare the variable
-//let y;
-//**const = constant value, will never change
-
-//Podka Spots 
-
-let cDiam = 50;
-
-let xSpacing = 100;
-let xOffset = 50;
-
-let ySpacing = 100;
-let yOffset = 50;
-
-
-
-//The rectangle will inverse the podka dots as mouse move
-//setup happens before the website is shown, only happens once and that's it
+//Setup happens before the website is shown, only happens once and that's it
 function setup(){
     createCanvas(1000,1000);
-    noLoop();
-}
+    //noLoop();
+ }
 
-//Create podka dots
+//Create many dots.
 function draw() {
+  blendMode(BLEND);
   background(255);
-//blendMode(MULTIPLY);
-  for (let xPos = xOffset; xPos <= width; xPos += xSpacing) {
-    for ( let yPos = yOffset; yPos <= height; yPos += ySpacing){
-    fill(0 + xPos/5);
+
+  for (let xPos = 0; xPos <= width; xPos += xSpacing) {
+    for ( let yPos = 0; yPos <= height; yPos += ySpacing){
+    //Create a gradient.
+    fill(0 + xPos/50);
     noStroke();
-    ellipse(xPos, yPos, cDiam+xPos/20);
+    let cSize = cDiam * (1-xPos/width);
+    ellipse(xPos, yPos, cSize);
   }}
 
-  //the color inverse when the mouse moves
-let rectWidth = 500//mouseX;
-let recHeight = 1000;
+  //The color will inverse as the mouse moves.
+  blendMode(DIFFERENCE);
+  noStroke();
+  fill(255);
+//Draw the rectangle that will inverse the color. 
+let rectWidth = mouseX;
+let rectHeight = height;
 
-rectMode(CENTER);
-fill(120,120,0);
-rect(500,500,500 ,500);
+rectMode(CORNER);
+rect(0,0,rectWidth,rectHeight);
 
 }
 
