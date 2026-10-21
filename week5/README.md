@@ -7,6 +7,11 @@ It works out pretty much what I expected. And I want to tweak the color a bit an
 
 For the class next week, I want to make a tomato clock based on the Pomodoro Technique, invented by Francesco Cirillo. He divided 30 minutes into two sections: 25 minutes for studying and working, the other 5 minutes for resting. I want the color of the tomato to darken for each passing minute just like how tomato ripen over time. And for the remaining 5 minutes, the tomato will be green.
 
+sketch2:
+Pretty much did what I want except the color transistion is not smooth enough since I've only given it 6 value. Maybe I'll try to smooth it out with lerpColor() or paletteLerp() from green to red. And the color could change by every minute instead of five.
+https://p5js.org/reference/p5/lerpColor/
+https://p5js.org/reference/p5/paletteLerp/
+
 https://en.wikipedia.org/wiki/Pomodoro_Technique
 
 
