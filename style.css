@@ -1,0 +1,51 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: #f7f7f8; 
+  color: #333;
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 0 20px;
+}
+
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 24px;
+}
+
+h1 .subtitle {
+  display: block;
+  font-size: 1rem;
+  font-weight: normal;
+  color: #666;
+  margin-top: 6px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 12px;
+}
+
+
+a {
+  display: block;
+  padding: 16px 20px;
+  background-color: #ffffff;
+  text-decoration: none;    
+  border-radius: 8px;        
+  border: 1px solid #e1e1e8; 
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+/*https://www.w3schools.com/css/ */
+/*https://developer.mozilla.org/zh-CN/*/
+/* Thanks for my roomie Charlie for her support with CSS*/
