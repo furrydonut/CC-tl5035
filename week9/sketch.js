@@ -1,80 +1,169 @@
 let faceMesh;
 let handPose;
 let video;
+let threshold = 100;
+let mthreshold = 80;
 
 let faces = [];
 let hands = [];
 
-// 模型配置选项
 let options = { 
   maxFaces: 1, 
   maxHands: 2, 
-  refineLandmarks: false, 
-  flipHorizontal: false 
 };
 
-function preload() {
-  // 可以加载你的面具图片或其他资源
-}
+let tears = [];
+let happyFaces = [];
 
 async function setup() {
   createCanvas(800, 600);
   
-  // 1. 创建共享的摄像头视频
   video = createCapture(VIDEO);
   video.size(800, 600);
   video.hide();
   
-  // 2. 同时异步加载两个模型
   faceMesh = await ml5.faceMesh(options);
   handPose = await ml5.handPose(options);
   
-  // 3. 分别开启两者的实时检测
   faceMesh.detectStart(video, gotFaces);
   handPose.detectStart(video, gotHands);
 }
 
-// 人脸检测回调
 function gotFaces(results) {
   faces = results;
 }
 
-// 手部检测回调
 function gotHands(results) {
   hands = results;
 }
 
 function draw() {
-  // 渲染视频背景
   image(video, 0, 0, width, height);
 
-  // 1. 绘制人脸相关逻辑（比如贴面具）
   if (faces.length > 0) {
+    // simplified version of faces[0]
     let face = faces[0];
-    let nose = face.keypoints[1];
-    
-    // 简单的圆形标记鼻子位置
-    fill(255, 0, 0);
-    noStroke();
-    ellipse(nose.x, nose.y, 15, 15);
-  }
 
-  // 2. 绘制手部相关逻辑（比如追踪手指尖）
-  if (hands.length > 0) {
-    for (let i = 0; i < hands.length; i++) {
-      let hand = hands[i];
-      // 获取食指指尖坐标 (索引 8)
-      let indexFinger = hand.keypoints[8];
+    // keypoints for the ends of eyes
+    let leftEye = face.keypoints[33]; 
+    let rightEye = face.keypoints[263]; 
+
+    // keypoints for the lips and nose
+    let leftMouth = face.keypoints[61];
+    let rightMouth = face.keypoints[291];
+    //let nose = face.keypoints[1];
+
+    if (leftEye && rightEye) {
+      let isLeftClose = false;
+      let isRightClose = false;
+      let isHappy = false;
+
+      if (hands.length > 0) {
+        let knuckles = [5, 9, 13, 17];
+
+        for (let h = 0; h < hands.length; h++) {
+          let hand = hands[h];
+
+          for (let idx of knuckles) {
+            let kPoint = hand.keypoints[idx];
+            if (kPoint) {
+              // check the distance between left eye and knuckle, right eye and knuckle, 
+              // if the distance is smaller than the threshold, then tears drop
+              let dLeft = dist(leftEye.x, leftEye.y, kPoint.x, kPoint.y);
+              let dRight = dist(rightEye.x, rightEye.y, kPoint.x, kPoint.y);
+
+              if (dLeft < threshold) isLeftClose = true;
+              if (dRight < threshold) isRightClose = true;
+            }
+          }
+        }
+      }
+
+      // when smiling, the distance between left and right mouth end increases,
+      //if the distance is larger than the threshold, then pop happy faces
+      let mouthWidth = dist(leftMouth.x, leftMouth.y, rightMouth.x, rightMouth.y);
+      if (mouthWidth > mthreshold) {
+        isHappy = true;
+      }
+
+  
+      // the velocity of tears and happy faces
+
+      // tears drop from the end of eyes
+      if (isLeftClose) {
+        tears.push({
+          x: leftEye.x + random(-5, 5),
+          y: leftEye.y,
+          vy: random(2, 5)
+        });
+      }
       
-      fill(0, 255, 0);
-      noStroke();
-      ellipse(indexFinger.x, indexFinger.y, 20, 20);
+      if (isRightClose) {
+        tears.push({
+          x: rightEye.x + random(-5, 5),
+          y: rightEye.y,
+          vy: random(2, 5)
+        });
+      }
+
+//pop from the bottom
+      if (isHappy) {
+        happyFaces.push({
+          x: random(width),
+          y: height + 20, 
+          size: random(20, 50),
+          vy: random(-2, -5)
+        });
+      }
+
+      // tears drop
+      textSize(24);
+      textAlign(CENTER, CENTER);
+      for (let i = tears.length - 1; i >= 0; i--) {
+        let t = tears[i];
+        text("💧", t.x, t.y);
+        
+        t.y += t.vy;        
+        
+        // disapear once they're out of the canvas 
+        if (t.y > height) {
+          tears.splice(i, 1);
+        }
+      }
+      // happy faces pop 
+      for (let i = happyFaces.length - 1; i >= 0; i--) {
+        let he = happyFaces[i];
+        textSize(he.size);
+        text("😃", he.x, he.y);
+        
+        he.y += he.vy; 
+        // disapear once they're out of the canvas 
+        if (he.y < -50) {
+          happyFaces.splice(i, 1);
+        }
+      }
+
+      // track the position of eyes
+      // fill(255, 0, 0);
+      // noStroke();
+      // ellipse(leftEye.x, leftEye.y, 10, 10);
+      // ellipse(rightEye.x, rightEye.y, 10, 10);
     }
   }
 
-  // UI 状态提示
-  fill(255, 255, 0);
-  textSize(18);
-  text("Faces detected: " + faces.length, 30, 40);
-  text("Hands detected: " + hands.length, 30, 70);
+  // track the positions     
+  // if (hands.length > 0) {
+  //   let knuckles = [5, 9, 13, 17];
+  //   for (let h = 0; h < hands.length; h++) {
+  //     let hand = hands[h];
+  //     for (let idx of knuckles) {
+  //       let kp = hand.keypoints[idx];
+  //       if (kp) {
+  //         fill(0, 255, 0);
+  //         noStroke();
+  //         ellipse(kp.x, kp.y, 12, 12);
+  //       }
+  //     }
+  //   }
+  // }
 }
